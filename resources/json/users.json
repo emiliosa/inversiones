@@ -1,0 +1,24 @@
+{
+  "fields": [
+    {
+      "name": "Id",
+      "type": "integer"
+    },
+    {
+      "name": "Name",
+      "type": "string"
+    },
+    {
+      "name": "Email",
+      "type": "string"
+    },
+    {
+      "name": "Password",
+      "type": "string"
+    },
+    {
+      "name": "Fecha Alta",
+      "type": "string"
+    }
+  ]
+}

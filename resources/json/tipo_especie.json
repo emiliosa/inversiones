@@ -1,0 +1,12 @@
+{
+  "fields": [
+    {
+      "name": "Id",
+      "type": "integer"
+    },
+    {
+      "name": "Denominación",
+      "type": "string"
+    }
+  ]
+}
