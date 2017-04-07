@@ -3,13 +3,11 @@
 @section('content')
     <div class="container">
         <div class="row">
-            @include('admin.sidebar')
-
             <div class="col-md-9">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Create New ComisionPorEspecie</div>
+                    <div class="panel-heading">Crear nueva Comisión por Especie</div>
                     <div class="panel-body">
-                        <a href="{{ url('/comision-por-especie') }}" title="Back"><button class="btn btn-warning btn-xs"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
+                        <a href="{{ route('comision-por-especie.index') }}" title="Back"><button class="btn btn-warning btn-xs"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</button></a>
                         <br />
                         <br />
 
@@ -21,7 +19,7 @@
                             </ul>
                         @endif
 
-                        {!! Form::open(['url' => '/comision-por-especie', 'class' => 'form-horizontal', 'files' => true]) !!}
+                        {!! Form::open(['route' => 'comision-por-especie.store', 'class' => 'form-horizontal', 'files' => true]) !!}
 
                         @include ('comision-por-especie.form')
 

@@ -3,13 +3,11 @@
 @section('content')
     <div class="container">
         <div class="row">
-            @include('admin.sidebar')
-
             <div class="col-md-9">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Edit ComisionPorEspecie #{{ $comisionporespecie->id }}</div>
+                    <div class="panel-heading">Editar comisión por especie</div>
                     <div class="panel-body">
-                        <a href="{{ url('/comision-por-especie') }}" title="Back"><button class="btn btn-warning btn-xs"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
+                        <a href="{{ route('comision-por-especie.show', $comisionPorEspecie->id) }}" title="Volver"><button class="btn btn-warning btn-xs"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</button></a>
                         <br />
                         <br />
 
@@ -21,14 +19,14 @@
                             </ul>
                         @endif
 
-                        {!! Form::model($comisionporespecie, [
+                        {!! Form::model($comisionPorEspecie, [
                             'method' => 'PATCH',
-                            'url' => ['/comision-por-especie', $comisionporespecie->id],
+                            'url' => ['/comision-por-especie', $comisionPorEspecie->id],
                             'class' => 'form-horizontal',
                             'files' => true
                         ]) !!}
 
-                        @include ('comision-por-especie.form', ['submitButtonText' => 'Update'])
+                        @include ('comision-por-especie.form', ['submitButtonText' => 'Actualizar'])
 
                         {!! Form::close() !!}
 

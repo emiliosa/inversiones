@@ -7,11 +7,18 @@ use Illuminate\Database\Eloquent\Model;
 class ComisionPorEspecie extends Model
 {
     /**
+     * Indicates if the model should be timestamped.
+     *
+     * @var bool
+     */
+    public $timestamps = false;
+
+    /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'comision_por_especies';
+    protected $table = 'comision_por_especie';
 
     /**
     * The database primary key value.

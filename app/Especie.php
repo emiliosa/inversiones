@@ -33,4 +33,9 @@ class Especie extends Model
      * @var array
      */
     protected $fillable = ['ticket', 'tipo_especie'];
+
+    public static function getEspecieList(){
+
+        return \DB::table('especies')->lists('id', 'ticket');
+    }
 }

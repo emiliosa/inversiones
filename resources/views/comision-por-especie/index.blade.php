@@ -3,64 +3,51 @@
 @section('content')
     <div class="container">
         <div class="row">
-            @include('admin.sidebar')
-
             <div class="col-md-9">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Comisionporespecie</div>
+                    <div class="panel-heading">Comisiones</div>
                     <div class="panel-body">
-                        <a href="{{ url('/comision-por-especie/create') }}" class="btn btn-success btn-sm" title="Add New ComisionPorEspecie">
-                            <i class="fa fa-plus" aria-hidden="true"></i> Add New
+                        <a href="{{ route('comision-por-especie.create') }}" class="btn btn-success btn-sm" title="Agregar nueva Comisión">
+                            <i class="fa fa-plus" aria-hidden="true"></i> Agregar
                         </a>
-
                         {!! Form::open(['method' => 'GET', 'url' => '/comision-por-especie', 'class' => 'navbar-form navbar-right', 'role' => 'search'])  !!}
                         <div class="input-group">
                             <input type="text" class="form-control" name="search" placeholder="Search...">
                             <span class="input-group-btn">
-                                <button class="btn btn-default" type="submit">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </span>
+                            <button class="btn btn-default" type="submit">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </span>
                         </div>
                         {!! Form::close() !!}
 
                         <br/>
                         <br/>
                         <div class="table-responsive">
-                            <table class="table table-borderless">
+                            <table class="table table-bordered" id="tableComisionPorEspecie">
                                 <thead>
-                                    <tr>
-                                        <th>ID</th><th>Actions</th>
-                                    </tr>
+                                <tr>
+                                    <th class="text-center">Id</th>
+                                    <th class="text-center">Especie</th>
+                                    <th class="text-center">Comision</th>
+                                </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($comisionporespecie as $item)
+                                @foreach($comisionPorEspecie as $item)
                                     <tr>
-                                        <td>{{ $item->id }}</td>
-                                        
+                                        <td class="text-center">{{ $item->id}}</td>
+                                        <td class="text-center">% {{ $item->especie_id}}</td>
+                                        <td class="text-center">% {{ $item->comision_id}}</td>
                                         <td>
-                                            <a href="{{ url('/comision-por-especie/' . $item->id) }}" title="View ComisionPorEspecie"><button class="btn btn-info btn-xs"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
-                                            <a href="{{ url('/comision-por-especie/' . $item->id . '/edit') }}" title="Edit ComisionPorEspecie"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
-                                            {!! Form::open([
-                                                'method'=>'DELETE',
-                                                'url' => ['/comision-por-especie', $item->id],
-                                                'style' => 'display:inline'
-                                            ]) !!}
-                                                {!! Form::button('<i class="fa fa-trash-o" aria-hidden="true"></i> Delete', array(
-                                                        'type' => 'submit',
-                                                        'class' => 'btn btn-danger btn-xs',
-                                                        'title' => 'Delete ComisionPorEspecie',
-                                                        'onclick'=>'return confirm("Confirm delete?")'
-                                                )) !!}
-                                            {!! Form::close() !!}
+                                            <a href="{{ route('comision-por-especie.show', $item->id) }}" class="btn btn-info">Ver</a>
                                         </td>
                                     </tr>
                                 @endforeach
                                 </tbody>
                             </table>
-                            <div class="pagination-wrapper"> {!! $comisionporespecie->appends(['search' => Request::get('search')])->render() !!} </div>
+                            </tbody>
+                            </table>
                         </div>
-
                     </div>
                 </div>
             </div>

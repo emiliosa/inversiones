@@ -9,7 +9,7 @@
 <div class="form-group {{ $errors->has('tipo_especie') ? 'has-error' : ''}}">
     {!! Form::label('tipo_especie', 'Tipo Especie', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
-        {!! Form::select('tipo_especie', @$tipoespecie, $especie->tipo_especie, ['class' => 'form-control']) !!}
+        {!! Form::select('tipo_especie', @$tipoespecie, isset($especie) ? $especie->tipo_especie : null, ['class' => 'form-control']) !!}
         {!! $errors->first('tipo_especie', '<p class="help-block">:message</p>') !!}
     </div>
 </div>

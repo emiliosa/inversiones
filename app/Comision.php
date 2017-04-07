@@ -7,11 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Comision extends Model
 {
     /**
-    * Indicates if the model should be timestamped.
-    *
-    * @var bool
-    */
-   public $timestamps = false;
+     * Indicates if the model should be timestamped.
+     *
+     * @var bool
+     */
+    public $timestamps = false;
 
     /**
      * The database table used by the model.
@@ -21,10 +21,10 @@ class Comision extends Model
     protected $table = 'comisiones';
 
     /**
-    * The database primary key value.
-    *
-    * @var string
-    */
+     * The database primary key value.
+     *
+     * @var string
+     */
     protected $primaryKey = 'id';
 
     /**
@@ -32,5 +32,9 @@ class Comision extends Model
      *
      * @var array
      */
-  protected $fillable = ['porcentaje'];
+    protected $fillable = ['porcentaje'];
+
+    public static function getComisionList(){
+        return \DB::table('comisiones')->lists('id', 'porcentaje');
+    }
 }

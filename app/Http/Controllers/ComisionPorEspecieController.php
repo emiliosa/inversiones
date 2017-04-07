@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Comision;
+use App\Especie;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\ComisionPorEspecie;
@@ -16,7 +18,7 @@ class ComisionPorEspecieController extends Controller {
      * @return \Illuminate\View\View
      */
     public function index(Request $request) {
-        $comisionPorEspecie = Comision::orderBy('porcentaje', 'asc')->get();
+        $comisionPorEspecie = ComisionPorEspecie::get();
         return view('comision-por-especie.index', compact('comisionPorEspecie'));
     }
 
@@ -26,7 +28,9 @@ class ComisionPorEspecieController extends Controller {
      * @return \Illuminate\View\View
      */
     public function create() {
-        return view('comision-por-especie.create');
+        $especie = Especie::getEspecieList();
+        $comision = Comision::getComisionList();
+        return view('comision-por-especie.create', compact('especie','comision'));
     }
 
     /**
@@ -37,6 +41,12 @@ class ComisionPorEspecieController extends Controller {
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function store(Request $request) {
+
+        $this->validate($request, [
+            'especie_id' => 'required',
+            'comision_id' => 'required',
+            'fecha' => 'required'
+        ]);
 
         $requestData = $request->all();
 
@@ -55,9 +65,9 @@ class ComisionPorEspecieController extends Controller {
      * @return \Illuminate\View\View
      */
     public function show($id) {
-        $comisionporespecie = ComisionPorEspecie::findOrFail($id);
+        $comisionPorEspecie = ComisionPorEspecie::findOrFail($id);
 
-        return view('comision-por-especie.show', compact('comisionporespecie'));
+        return view('comision-por-especie.show', compact('comisionPorEspecie'));
     }
 
     /**
@@ -68,9 +78,10 @@ class ComisionPorEspecieController extends Controller {
      * @return \Illuminate\View\View
      */
     public function edit($id) {
-        $comisionporespecie = ComisionPorEspecie::findOrFail($id);
-
-        return view('comision-por-especie.edit', compact('comisionporespecie'));
+        $comisionPorEspecie = ComisionPorEspecie::findOrFail($id);
+        $especie = Especie::getEspecieList();
+        $comision = Comision::getComisionList();
+        return view('comision-por-especie.edit', compact('comisionPorEspecie'));
     }
 
     /**
@@ -83,9 +94,15 @@ class ComisionPorEspecieController extends Controller {
      */
     public function update($id, Request $request) {
 
+        $this->validate($request, [
+            'especie_id' => 'required',
+            'comision_id' => 'required',
+            'fecha' => 'required'
+        ]);
+
         $requestData = $request->all();
 
-        $comisionporespecie = ComisionPorEspecie::findOrFail($id);
+        $comisionPorEspecie = ComisionPorEspecie::findOrFail($id);
         $comisionporespecie->update($requestData);
 
         Session::flash('flash_message', 'ComisionPorEspecie updated!');

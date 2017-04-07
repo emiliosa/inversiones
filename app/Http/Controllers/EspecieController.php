@@ -82,7 +82,6 @@ class EspecieController extends Controller
     {
         $especie = Especie::findOrFail($id);
         $tipoespecie = TipoEspecie::getTipoEspecieList();
-        //$tipoespecie = \DB::table('tipo_especie')->lists('denominacion');
         return view('especie.edit', compact('especie', 'tipoespecie'));
     }
 
