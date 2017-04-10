@@ -34,7 +34,7 @@ class Comision extends Model
      */
     protected $fillable = ['porcentaje'];
 
-    public static function getComisionList(){
-        return \DB::table('comisiones')->lists('id', 'porcentaje');
+    public function operaciones(){
+        return $this->hasMany('\App\Operacion');
     }
 }

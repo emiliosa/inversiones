@@ -34,8 +34,12 @@ class Moneda extends Model {
      */
     protected $fillable = ['denominacion'];
 
+    public function operaciones(){
+        return $this->hasMany('\App\Operacion');
+    }
+
     public static function getMonedaList(){
-        return \DB::table('monedas')->lists('id', 'denominacion');
+        return \DB::table('monedas')->lists('denominacion', 'id');
     }
 
 }

@@ -14,7 +14,7 @@ class CreateOperacionesTable extends Migration
     {
         Schema::create('operaciones', function (Blueprint $table) {
             $table->increments('id');
-            $table->enum('tipo_operacion', ['Compra', 'Venta']);
+            $table->string('tipo_operacion');
             $table->integer('especie_id')->unsigned();
             $table->date('fecha');
             $table->integer('cant_nominales')->unsigned();

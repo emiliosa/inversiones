@@ -34,8 +34,12 @@ class Especie extends Model
      */
     protected $fillable = ['ticket', 'tipo_especie'];
 
+    public function operaciones(){
+        return $this->hasMany('\App\Operacion');
+    }
+
     public static function getEspecieList(){
 
-        return \DB::table('especies')->lists('id', 'ticket');
+        return \DB::table('especies')->lists('ticket', 'id');
     }
 }

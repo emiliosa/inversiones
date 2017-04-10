@@ -28,9 +28,13 @@ class ComisionPorEspecieController extends Controller {
      * @return \Illuminate\View\View
      */
     public function create() {
-        $especie = Especie::getEspecieList();
-        $comision = Comision::getComisionList();
-        return view('comision-por-especie.create', compact('especie','comision'));
+        /*$especie = Especie::getEspecieList();
+        $comision = Comision::getComisionList();*/
+        $especie = Especie::orderBy('ticket', 'asc')->lists('ticket', 'id');
+        $comision = Comision::orderBy('porcentaje', 'asc')->lists('porcentaje', 'id');
+        $especie->prepend('Seleccione especie');
+        $comision->prepend('Seleccione comision');
+        return view('comision-por-especie.create', compact('especie', 'comision'));
     }
 
     /**
@@ -79,9 +83,13 @@ class ComisionPorEspecieController extends Controller {
      */
     public function edit($id) {
         $comisionPorEspecie = ComisionPorEspecie::findOrFail($id);
-        $especie = Especie::getEspecieList();
-        $comision = Comision::getComisionList();
-        return view('comision-por-especie.edit', compact('comisionPorEspecie'));
+        /*$especie = Especie::getEspecieList();
+        $comision = Comision::getComisionList();*/
+        $especie = Especie::lists('ticket', 'id');
+        $comision = Comision::lists('porcentaje', 'id');
+        $especie->prepend('Seleccione especie');
+        $especie->prepend('Seleccione comision');
+        return view('comision-por-especie.edit', compact('comisionPorEspecie', 'especie', 'comision'));
     }
 
     /**

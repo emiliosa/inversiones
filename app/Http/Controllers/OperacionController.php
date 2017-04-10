@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Comision;
+use App\Especie;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\Moneda;
 use App\Operacion;
 use Illuminate\Http\Request;
 use Session;
@@ -16,19 +19,9 @@ class OperacionController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function index(Request $request)
-    {
-        $keyword = $request->get('search');
-        $perPage = 25;
-
-        if (!empty($keyword)) {
-            $operacion = Operacion::
-                ->paginate($perPage);
-        } else {
-            $operacion = Operacion::paginate($perPage);
-        }
-
-        return view('operacion.index', compact('operacion'));
+    public function index(Request $request){
+        $operaciones = Operacion::with('especie','moneda','comision','derechoMercado','ivaComision')->get();
+        return view('operacion.index', compact('operaciones'));
     }
 
     /**
@@ -36,9 +29,19 @@ class OperacionController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function create()
-    {
-        return view('operacion.create');
+    public function create(){
+        $tipoOperacion = Operacion::tipoOperacion();
+        $especie = Especie::orderBy('ticket', 'asc')->lists('ticket', 'id');
+        $moneda = Moneda::orderBy('denominacion', 'asc')->lists('denominacion', 'id');
+        $comision = Comision::orderBy('porcentaje', 'asc')->lists('porcentaje', 'id');
+        $derechoMercado = Comision::orderBy('porcentaje', 'asc')->lists('porcentaje', 'id');
+        $iva = Comision::orderBy('porcentaje', 'asc')->lists('porcentaje', 'id');
+        $especie->prepend('Seleccione especie');
+        $moneda->prepend('Seleccione moneda');
+        $comision->prepend('Seleccione comision');
+        $derechoMercado->prepend('Seleccione comision');
+        $iva->prepend('Seleccione IVA');
+        return view('operacion.create', compact('tipoOperacion','especie','moneda','comision','derechoMercado','iva'));
     }
 
     /**
@@ -48,11 +51,22 @@ class OperacionController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function store(Request $request)
-    {
-        
+    public function store(Request $request){
+
+        $this->validate($request, [
+            'tipo_operacion' => 'required',
+            'especie_id' => 'required',
+            'fecha' => 'required',
+            'cant_nominales' => 'required',
+            'moneda_id' => 'required',
+            'cotizacion' => 'required',
+            'comision_id' => 'required',
+            'derecho_mercado' => 'required',
+            'iva' => 'required'
+        ]);
+
         $requestData = $request->all();
-        
+
         Operacion::create($requestData);
 
         Session::flash('flash_message', 'Operacion added!');
@@ -69,8 +83,7 @@ class OperacionController extends Controller
      */
     public function show($id)
     {
-        $operacion = Operacion::findOrFail($id);
-
+        $operacion = Operacion::with('especie','moneda','comision','derechoMercado','ivaComision')->findOrFail($id);
         return view('operacion.show', compact('operacion'));
     }
 
@@ -81,11 +94,21 @@ class OperacionController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function edit($id)
-    {
-        $operacion = Operacion::findOrFail($id);
+    public function edit($id){
 
-        return view('operacion.edit', compact('operacion'));
+        $operacion = Operacion::findOrFail($id);
+        $tipoOperacion = Operacion::tipoOperacion();
+        $especie = Especie::orderBy('ticket', 'asc')->lists('ticket', 'id');
+        $moneda = Moneda::orderBy('denominacion', 'asc')->lists('denominacion', 'id');
+        $comision = Comision::orderBy('porcentaje', 'asc')->lists('porcentaje', 'id');
+        $derechoMercado = Comision::orderBy('porcentaje', 'asc')->lists('porcentaje', 'id');
+        $iva = Comision::orderBy('porcentaje', 'asc')->lists('porcentaje', 'id');
+        $especie->prepend('Seleccione especie');
+        $moneda->prepend('Seleccione moneda');
+        $comision->prepend('Seleccione comision');
+        $derechoMercado->prepend('Seleccione comision');
+        $iva->prepend('Seleccione IVA');
+        return view('operacion.edit', compact('operacion','tipoOperacion','especie','moneda','comision','derechoMercado','iva'));
     }
 
     /**
@@ -98,9 +121,20 @@ class OperacionController extends Controller
      */
     public function update($id, Request $request)
     {
-        
+        $this->validate($request, [
+            'tipo_operacion' => 'required',
+            'especie_id' => 'required',
+            'fecha' => 'required',
+            'cant_nominales' => 'required',
+            'moneda_id' => 'required',
+            'cotizacion' => 'required',
+            'comision_id' => 'required',
+            'derecho_mercado' => 'required',
+            'iva' => 'required'
+        ]);
+
         $requestData = $request->all();
-        
+
         $operacion = Operacion::findOrFail($id);
         $operacion->update($requestData);
 

@@ -3,13 +3,11 @@
 @section('content')
     <div class="container">
         <div class="row">
-            @include('admin.sidebar')
-
             <div class="col-md-9">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Edit Operacion #{{ $operacion->id }}</div>
+                    <div class="panel-heading">Editar operacion</div>
                     <div class="panel-body">
-                        <a href="{{ url('/operacion') }}" title="Back"><button class="btn btn-warning btn-xs"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
+                        <a href="{{ route('operacion.show', $operacion->id) }}" title="Volver"><button class="btn btn-warning btn-xs"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</button></a>
                         <br />
                         <br />
 
@@ -28,7 +26,7 @@
                             'files' => true
                         ]) !!}
 
-                        @include ('operacion.form', ['submitButtonText' => 'Update'])
+                        @include ('operacion.form', ['submitButtonText' => 'Actualizar'])
 
                         {!! Form::close() !!}
 
