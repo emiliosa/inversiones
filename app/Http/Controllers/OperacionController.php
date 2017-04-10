@@ -31,11 +31,11 @@ class OperacionController extends Controller
      */
     public function create(){
         $tipoOperacion = Operacion::tipoOperacion();
-        $especie = Especie::orderBy('ticket', 'asc')->lists('ticket', 'id');
-        $moneda = Moneda::orderBy('denominacion', 'asc')->lists('denominacion', 'id');
-        $comision = Comision::orderBy('porcentaje', 'asc')->lists('porcentaje', 'id');
-        $derechoMercado = Comision::orderBy('porcentaje', 'asc')->lists('porcentaje', 'id');
-        $iva = Comision::orderBy('porcentaje', 'asc')->lists('porcentaje', 'id');
+        $especie = Especie::lists('ticket', 'id');
+        $moneda = Moneda::lists('denominacion', 'id');
+        $comision = Comision::lists('porcentaje', 'id');
+        $derechoMercado = Comision::lists('porcentaje', 'id');
+        $iva = Comision::lists('porcentaje', 'id');
         $especie->prepend('Seleccione especie');
         $moneda->prepend('Seleccione moneda');
         $comision->prepend('Seleccione comision');
