@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-9">
+            <div>
                 <div class="panel panel-default">
                     <div class="panel-heading">Comisiones</div>
                     <div class="panel-body">
@@ -33,23 +33,26 @@
                                     <th class="text-center">Moneda</th>
                                     <th class="text-center">Cant. Nominales</th>
                                     <th class="text-center">Cotizacion</th>
-                                    <th class="text-center">Comision</th>
-                                    <th class="text-center">Derecho Mercado</th>
-                                    <th class="text-center">IVA</th>
+                                    <th class="text-center" colspan="2">Comision</th>
+                                    <th class="text-center" colspan="2">Derecho Mercado</th>
+                                    <th class="text-center" colspan="2">IVA</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($operaciones as $item)
                                     <tr>
-                                        <td class="text-center">{{ $item->tipo_operacion }}</td>
+                                        <td class="text-center">{{ $tipoOperacion[$item->tipo_operacion] }}</td>
                                         <td class="text-center">{{ $item->especie->ticket }}</td>
                                         <td class="text-center">{{ $item->fecha }}</td>
                                         <td class="text-center">{{ $item->moneda->denominacion }}</td>
                                         <td class="text-center">{{ $item->cant_nominales }}</td>
-                                        <td class="text-center">{{ $item->cotizacion }}</td>
-                                        <td class="text-center">{{ $item->comision->porcentaje }}</td>
-                                        <td class="text-center">{{ $item->derechoMercado->porcentaje }}</td>
-                                        <td class="text-center">{{ $item->ivaComision->porcentaje }}</td>
+                                        <td class="text-center">% {{ $item->cotizacion }}</td>
+                                        <td class="text-center">% {{ $item->comision->porcentaje }}</td>
+                                        <td class="text-center">$ {{ $item->cant_nominales * $item->cotizacion * $item->comision->porcentaje  }}</td>
+                                        <td class="text-center">% {{ $item->derechoMercado->porcentaje }}</td>
+                                        <td class="text-center">$ {{ $item->cant_nominales * $item->cotizacion * $item->derechoMercado->porcentaje  }}</td>
+                                        <td class="text-center">% {{ $item->ivaComision->porcentaje }}</td>
+                                        <td class="text-center">$ {{ $item->cant_nominales * $item->cotizacion * $item->derechoMercado->porcentaje  }}</td>
                                         <td>
                                             <a href="{{ route('operacion.show', $item->id) }}" class="btn btn-info">Ver</a>
                                         </td>

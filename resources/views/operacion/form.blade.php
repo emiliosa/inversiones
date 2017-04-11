@@ -1,17 +1,15 @@
-<div class="form-group {{ $errors->has('TipoOperacion') ? 'has-error' : ''}}">
-    {!! Form::label('TipoOperacion', 'TipoOperacion', ['class' => 'col-md-4 control-label']) !!}
+<div class="form-group {{ $errors->has('tipoOperacion') ? 'has-error' : ''}}">
+    {!! Form::label('tipoOperacion', 'Tipo Operacion', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
-        {!! Form::select('tipo_operacion', @$tipoOperacion , isset($operacion) ? $operacion->tipo_operacion : null, ['class' => 'form-control']) !!}
+        {!! Form::select('tipo_operacion', @$tipoOperacion , isset($operacion) ? $operacion->tipo_operacion : null, ['class' => 'form-control' , 'placeholder' => 'Seleccione operación']) !!}
         {!! $errors->first('tipo_operacion', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
 
-{{ $especie }}
-
 <div class="form-group {{ $errors->has('Especie') ? 'has-error' : ''}}">
     {!! Form::label('Especie', 'Especie', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
-        {!! Form::select('especie_id', @$especie, isset($operacion) ? $operacion->especie_id : null, ['class' => 'form-control']) !!}
+        {!! Form::select('especie_id', @$especie, isset($operacion) ? $operacion->especie_id : null, ['class' => 'form-control' , 'placeholder' => 'Seleccione especie']) !!}
         {!! $errors->first('especie_id', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
@@ -27,7 +25,7 @@
 <div class="form-group {{ $errors->has('Moneda') ? 'has-error' : ''}}">
     {!! Form::label('Moneda', 'Moneda', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
-        {!! Form::select('moneda_id', @$moneda, isset($operacion) ? $operacion->moneda_id : null, ['class' => 'form-control']) !!}
+        {!! Form::select('moneda_id', @$moneda, isset($operacion) ? $operacion->moneda_id : null, ['class' => 'form-control' , 'placeholder' => 'Seleccione moneda']) !!}
         {!! $errors->first('moneda_id', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
@@ -51,7 +49,7 @@
 <div class="form-group {{ $errors->has('Comision') ? 'has-error' : ''}}">
     {!! Form::label('comision', 'Comision', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
-        {!! Form::select('comision_id', @$comision, isset($operacion) ? $operacion->comision_id : null, ['class' => 'form-control']) !!}
+        {!! Form::select('comision_id', @$comision, isset($operacion) ? $operacion->comision_id : null, ['class' => 'form-control' , 'placeholder' => 'Seleccione comision']) !!}
         {!! $errors->first('comision_id', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
@@ -59,7 +57,7 @@
 <div class="form-group {{ $errors->has('DerechoMercado') ? 'has-error' : ''}}">
     {!! Form::label('DerechoMercado', 'DerechoMercado', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
-        {!! Form::select('derecho_mercado', @$derechoMercado, isset($operacion) ? $operacion->derecho_mercado : null, ['class' => 'form-control']) !!}
+        {!! Form::select('derecho_mercado', @$derechoMercado, isset($operacion) ? $operacion->derecho_mercado : null, ['class' => 'form-control' , 'placeholder' => 'Seleccione comision']) !!}
         {!! $errors->first('derecho_mercado', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
@@ -67,7 +65,7 @@
 <div class="form-group {{ $errors->has('IVA') ? 'has-error' : ''}}">
     {!! Form::label('IVA', 'IVA', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
-        {!! Form::select('iva', @$iva, isset($operacion) ? $operacion->iva : null, ['class' => 'form-control']) !!}
+        {!! Form::select('iva', @$iva, isset($operacion) ? $operacion->iva : null, ['class' => 'form-control' , 'placeholder' => 'Seleccione IVA']) !!}
         {!! $errors->first('iva', '<p class="help-block">:message</p>') !!}
     </div>
 </div>

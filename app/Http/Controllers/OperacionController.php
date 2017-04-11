@@ -20,8 +20,9 @@ class OperacionController extends Controller
      * @return \Illuminate\View\View
      */
     public function index(Request $request){
+        $tipoOperacion = Operacion::tipoOperacion();
         $operaciones = Operacion::with('especie','moneda','comision','derechoMercado','ivaComision')->get();
-        return view('operacion.index', compact('operaciones'));
+        return view('operacion.index', compact('operaciones','tipoOperacion'));
     }
 
     /**
@@ -31,16 +32,16 @@ class OperacionController extends Controller
      */
     public function create(){
         $tipoOperacion = Operacion::tipoOperacion();
-        $especie = Especie::lists('ticket', 'id');
+        $especie = Especie::orderBy('ticket')->lists('ticket', 'id');
         $moneda = Moneda::lists('denominacion', 'id');
         $comision = Comision::lists('porcentaje', 'id');
         $derechoMercado = Comision::lists('porcentaje', 'id');
         $iva = Comision::lists('porcentaje', 'id');
-        $especie->prepend('Seleccione especie');
+        /*$especie->prepend('Seleccione especie');
         $moneda->prepend('Seleccione moneda');
         $comision->prepend('Seleccione comision');
         $derechoMercado->prepend('Seleccione comision');
-        $iva->prepend('Seleccione IVA');
+        $iva->prepend('Seleccione IVA');*/
         return view('operacion.create', compact('tipoOperacion','especie','moneda','comision','derechoMercado','iva'));
     }
 
@@ -103,11 +104,11 @@ class OperacionController extends Controller
         $comision = Comision::orderBy('porcentaje', 'asc')->lists('porcentaje', 'id');
         $derechoMercado = Comision::orderBy('porcentaje', 'asc')->lists('porcentaje', 'id');
         $iva = Comision::orderBy('porcentaje', 'asc')->lists('porcentaje', 'id');
-        $especie->prepend('Seleccione especie');
+        /*$especie->prepend('Seleccione especie');
         $moneda->prepend('Seleccione moneda');
         $comision->prepend('Seleccione comision');
         $derechoMercado->prepend('Seleccione comision');
-        $iva->prepend('Seleccione IVA');
+        $iva->prepend('Seleccione IVA');*/
         return view('operacion.edit', compact('operacion','tipoOperacion','especie','moneda','comision','derechoMercado','iva'));
     }
 
