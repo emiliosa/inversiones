@@ -31,7 +31,11 @@ class Operacion extends Model
      *
      * @var array
      */
-    protected $fillable = ['tipo_operacion', 'especie_id', 'fecha', 'cant_nominales', 'moneda_id', 'cotizacion', 'comision_id', 'derecho_mercado', 'iva'];
+    protected $fillable = ['tipo_operacion', 'especie_id', 'fecha', 'cant_nominales', 'moneda_id', 'cotizacion', 'comision_id', 'derecho_mercado', 'iva', 'contraparte_id'];
+
+    public function operaciones(){
+        return $this->hasMany('\App\Operacion');
+    }
 
     public function especie(){
         return $this->belongsTo('\App\Especie');
@@ -53,7 +57,27 @@ class Operacion extends Model
         return $this->belongsTo('\App\Comision','iva');
     }
 
+    public function contraparte(){
+        return $this->belongsTo('\App\Operacion','contraparte_id');
+    }
+
     public static function tipoOperacion(){
         return array('Compra','Venta');
+    }
+
+    public function setFechaAttribute($fecha){
+        $this->attributes['fecha'] = \Carbon\Carbon::createFromFormat('d-m-Y', $fecha)->format('Y-m-d');
+    }
+
+    public function getFechaAttribute($fecha){
+        return \Carbon\Carbon::createFromFormat('Y-m-d', $fecha)->format('d-m-Y');
+    }
+
+    public function setContraparteIdAttribute($contraparte){
+        $this->attributes['contraparte_id'] = $contraparte !== '' ? $contraparte : null;
+    }
+
+    public function getContraparteIdAttribute($contraparte){
+        return $contraparte;
     }
 }

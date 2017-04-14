@@ -28,8 +28,12 @@
                             <table class="table table-borderless">
                                 <tbody>
                                     <tr>
+                                        <th>ID</th>
+                                        <td>{{ $operacion->id }}</td>
+                                    </tr>
+                                    <tr>
                                         <th>Tipo Operación</th>
-                                        <td>{{ $operacion->tipo_operacion }}</td>
+                                        <td>{{ $tipoOperacion[$operacion->tipo_operacion] }}</td>
                                     </tr>
                                     <tr>
                                         <th>Especie</th>
@@ -62,6 +66,10 @@
                                     <tr>
                                         <th>IVA</th>
                                         <td>{{ $operacion->ivaComision->porcentaje }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Contraparte</th>
+                                        <td>{{ $operacion->contraparte_id }}</td>
                                     </tr>
                                 </tbody>
                             </table>

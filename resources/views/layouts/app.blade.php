@@ -10,9 +10,13 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
+    <!-- Jquery -->
+    <script src="{{asset('js/jquery-3.2.1.min.js')}}"></script>
+    <script src="{{asset('js/jquery-ui.min.js')}}"></script>
+
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{asset('css/font-awesome.min.css')}}">
 
     <!-- Scripts -->
     <script>
@@ -20,6 +24,32 @@
             'csrfToken' => csrf_token(),
         ]) !!};
     </script>
+
+    <!-- Datepicker -->
+    <!--<link rel="stylesheet" type="text/css" href="{{asset('css/bootstrap.min.css')}}"/>-->
+    <script src="{{asset('js/bootstrap-datepicker.min.js')}}"></script>
+    <script src="{{asset('js/bootstrap-datepicker.es.min.js')}}"></script>
+    <script>
+        $(document).ready(function() {
+            $('.datepicker').datepicker({
+                format: "dd-mm-yyyy",
+                language: "es",
+                autoclose: true
+            });
+            $('.comment').click(function(){
+                $('#dialog-modal').dialog({
+                    width:400,
+                    height:250,
+                    resizable:true,
+                    modal:true,
+                    dialogClass: "mydialog",
+                    position: { my: "left top+50 " ,  of :"#subscribe" },
+                });
+                $('#dialog-modal').show();
+            });
+        });
+    </script>
+
 </head>
 <body>
     <div id="app">

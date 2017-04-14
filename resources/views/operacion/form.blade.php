@@ -17,7 +17,7 @@
 <div class="form-group {{ $errors->has('Fecha') ? 'has-error' : ''}}">
     {!! Form::label('Fecha', 'Fecha', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
-        {!! Form::date('fecha', isset($operacion) ? $operacion ->fecha : \Carbon\Carbon::now()) !!}
+        {!! Form::date('fecha', isset($operacion) ? $operacion->fecha : \Carbon\Carbon::now()->format('d-m-Y'), ['class' => 'form-control datepicker']) !!}
         {!! $errors->first('fecha', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
@@ -41,7 +41,7 @@
 <div class="form-group {{ $errors->has('Cotizacion') ? 'has-error' : ''}}">
     {!! Form::label('Cotizacion', 'Cotizacion', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
-        {!! Form::number('cotizacion', isset($operacion) ? $operacion->cotizacion : '0') !!}
+        {!! Form::number('cotizacion', isset($operacion) ? $operacion->cotizacion : '0', ['class' => 'form-control' , 'step' => 'any']) !!}
         {!! $errors->first('cotizacion', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
@@ -67,6 +67,14 @@
     <div class="col-md-6">
         {!! Form::select('iva', @$iva, isset($operacion) ? $operacion->iva : null, ['class' => 'form-control' , 'placeholder' => 'Seleccione IVA']) !!}
         {!! $errors->first('iva', '<p class="help-block">:message</p>') !!}
+    </div>
+</div>
+
+<div class="form-group {{ $errors->has('Contraparte') ? 'has-error' : ''}}">
+    {!! Form::label('contraparte', 'Contraparte', ['class' => 'col-md-4 control-label']) !!}
+    <div class="col-md-6">
+        {!! Form::select('contraparte_id', @$contraparte, isset($operacion) ? $operacion->contraparte_id : null, ['class' => 'form-control' , 'placeholder' => 'Seleccione Contraparte']) !!}
+        {!! $errors->first('contraparte_id', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
 

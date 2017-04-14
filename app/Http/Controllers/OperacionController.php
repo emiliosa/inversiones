@@ -31,18 +31,14 @@ class OperacionController extends Controller
      * @return \Illuminate\View\View
      */
     public function create(){
+        $contraparte = Operacion::lists('id');
         $tipoOperacion = Operacion::tipoOperacion();
         $especie = Especie::orderBy('ticket')->lists('ticket', 'id');
         $moneda = Moneda::lists('denominacion', 'id');
         $comision = Comision::lists('porcentaje', 'id');
         $derechoMercado = Comision::lists('porcentaje', 'id');
         $iva = Comision::lists('porcentaje', 'id');
-        /*$especie->prepend('Seleccione especie');
-        $moneda->prepend('Seleccione moneda');
-        $comision->prepend('Seleccione comision');
-        $derechoMercado->prepend('Seleccione comision');
-        $iva->prepend('Seleccione IVA');*/
-        return view('operacion.create', compact('tipoOperacion','especie','moneda','comision','derechoMercado','iva'));
+        return view('operacion.create', compact('contraparte','tipoOperacion','especie','moneda','comision','derechoMercado','iva'));
     }
 
     /**
@@ -82,10 +78,11 @@ class OperacionController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function show($id)
-    {
+    public function show($id){
+
+        $tipoOperacion = Operacion::tipoOperacion();
         $operacion = Operacion::with('especie','moneda','comision','derechoMercado','ivaComision')->findOrFail($id);
-        return view('operacion.show', compact('operacion'));
+        return view('operacion.show', compact('operacion','tipoOperacion'));
     }
 
     /**
@@ -96,20 +93,15 @@ class OperacionController extends Controller
      * @return \Illuminate\View\View
      */
     public function edit($id){
-
         $operacion = Operacion::findOrFail($id);
+        $contraparte = Operacion::lists('id','id');
         $tipoOperacion = Operacion::tipoOperacion();
-        $especie = Especie::orderBy('ticket', 'asc')->lists('ticket', 'id');
-        $moneda = Moneda::orderBy('denominacion', 'asc')->lists('denominacion', 'id');
-        $comision = Comision::orderBy('porcentaje', 'asc')->lists('porcentaje', 'id');
-        $derechoMercado = Comision::orderBy('porcentaje', 'asc')->lists('porcentaje', 'id');
-        $iva = Comision::orderBy('porcentaje', 'asc')->lists('porcentaje', 'id');
-        /*$especie->prepend('Seleccione especie');
-        $moneda->prepend('Seleccione moneda');
-        $comision->prepend('Seleccione comision');
-        $derechoMercado->prepend('Seleccione comision');
-        $iva->prepend('Seleccione IVA');*/
-        return view('operacion.edit', compact('operacion','tipoOperacion','especie','moneda','comision','derechoMercado','iva'));
+        $especie = Especie::orderBy('ticket')->lists('ticket', 'id');
+        $moneda = Moneda::lists('denominacion', 'id');
+        $comision = Comision::lists('porcentaje', 'id');
+        $derechoMercado = Comision::lists('porcentaje', 'id');
+        $iva = Comision::lists('porcentaje', 'id');
+        return view('operacion.edit', compact('operacion','contraparte','tipoOperacion','especie','moneda','comision','derechoMercado','iva'));
     }
 
     /**

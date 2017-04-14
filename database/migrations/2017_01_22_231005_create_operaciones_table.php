@@ -23,12 +23,14 @@ class CreateOperacionesTable extends Migration
             $table->integer('comision_banco')->unsigned();
             $table->integer('derecho_mercado')->unsigned();
             $table->integer('iva')->unsigned();
+            $table->integer('contraparte_id')->unsigned()->nullable();
 
             $table->foreign('especie_id')->references('id')->on('especies');
             $table->foreign('moneda_id')->references('id')->on('monedas');
             $table->foreign('comision_banco')->references('id')->on('comisiones');
             $table->foreign('derecho_mercado')->references('id')->on('comisiones');
             $table->foreign('iva')->references('id')->on('comisiones');
+            $table->foreign('contraparte_id')->references('id')->on('operaciones');
         });
     }
 
