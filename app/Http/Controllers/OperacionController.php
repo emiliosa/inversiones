@@ -31,7 +31,7 @@ class OperacionController extends Controller
      * @return \Illuminate\View\View
      */
     public function create(){
-        $contraparte = Operacion::lists('id');
+        $contraparte = Operacion::lists('id','id');
         $tipoOperacion = Operacion::tipoOperacion();
         $especie = Especie::orderBy('ticket')->lists('ticket', 'id');
         $moneda = Moneda::lists('denominacion', 'id');
@@ -150,5 +150,18 @@ class OperacionController extends Controller
         Session::flash('flash_message', 'Operacion deleted!');
 
         return redirect('operacion');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function contraparte(Request $request){
+
+        if ($request->isMethod('get')){
+            return response()->json(['response' => 'This is get method']);
+        }
+        return response()->json(['response' => 'This is post method']);
     }
 }

@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
+    <script type="text/javascript" src="{{asset('js/funciones.js')}}"></script>
+    <div class="container col-md-12">
         <div class="row">
             <div>
                 <div class="panel panel-default">
@@ -63,7 +64,7 @@
                                         <td class="text-center">%{{ $item->ivaComision->porcentaje }}</td>
                                         <td class="text-center">${{ $iva }}</td>
                                         <td class="text-center">${{ $total }}</td>
-                                        <td class="text-center"><button class="more comment">Venta</button></td>
+                                        <td class="text-center"><a href="#" id="contraparte{{ $item->id }}" class="contraparte">Contraparte</a></td>
                                         <td>
                                             <a href="{{ route('operacion.show', $item->id) }}" class="btn btn-info">Ver</a>
                                         </td>
@@ -72,13 +73,20 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div id="dialog-modal" style="display:none">
-                            <table class="innerTable">
+                        <div id="dialog-modal" title="Contraparte">
+                            <table class="table table-bordered" id="tableContraparte">
                                 <thead>
-                                <tr class="infoHead">
-                                    <td>Name</td>
-                                    <td>Pseudo</td>
-                                </tr>
+                                <th class="text-center">ID</th>
+                                <th class="text-center">Tipo Operacion</th>
+                                <th class="text-center">Especie</th>
+                                <th class="text-center">Fecha</th>
+                                <th class="text-center">Moneda</th>
+                                <th class="text-center">Cant. Nominales</th>
+                                <th class="text-center">Cotizacion</th>
+                                <th class="text-center" colspan="2">Comision</th>
+                                <th class="text-center" colspan="2">Derecho Mercado</th>
+                                <th class="text-center" colspan="2">IVA</th>
+                                <th class="text-center">Total</th>
                                 </thead>
                                 <tbody>
                                 <tr>

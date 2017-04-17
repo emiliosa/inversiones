@@ -15,6 +15,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/contraparte', 'OperacionController@contraparte');
+
 Route::resource('tipo-especie', 'TipoEspecieController');
 Route::resource('comision', 'ComisionController');
 Route::resource('moneda', 'MonedaController');
